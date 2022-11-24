@@ -3,6 +3,12 @@ import { NavLink } from 'react-router-dom';
 import './Header.scss'
 
 const Header = () => {
+
+    const handleLogin = ()=> {
+        //redirect to sso
+        window.location.href = `${process.env.REACT_APP_BACKEND_SSO}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`
+    }
+
     return (  
         <>
             <Navbar bg='light' expand='lg'>
@@ -16,7 +22,7 @@ const Header = () => {
                         </Nav>
                         <Nav>
                             <NavDropdown title='Settings' id='basic-nav-dropdown'>
-                                <NavDropdown.Item href='#action/3.1'>Login</NavDropdown.Item>
+                                <NavDropdown.Item onClick={()=>handleLogin()}>Login</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
