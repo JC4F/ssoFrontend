@@ -1,7 +1,7 @@
 const About = () => {
     return ( 
         <>
-            about me
+            <button className="btn btn-primary">About me</button>
         </>
     );
 }
