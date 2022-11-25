@@ -12,6 +12,7 @@ import About from './components/About/About'
 import AppRoute from './routes/AppRoute'
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import Code from './components/Code/Code';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,7 @@ root.render(
           <Route path='/' element={<AppRoute/>}>
             <Route path='about' element={<About/>}/>
           </Route>
+          <Route path='code' element={<Code/>}/>
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
