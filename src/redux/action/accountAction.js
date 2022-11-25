@@ -23,3 +23,21 @@ export const doLogin = (ssoToken) => {
         })
     }
 }
+export const doGetAccount = () => {
+    return async(dispatch, getState)=>{
+        dispatch({type: USER_LOGIN_REQUEST})
+        axios.get(
+            process.env.REACT_APP_GET_ACCOUNT, 
+            { withCredentials: true }
+        ).then(res=>{
+            if(res && +res.EC === 0){
+                dispatch({type: USER_LOGIN_SUCCESS, user: res.DT})
+            }else {
+                dispatch({type: USER_LOGIN_FAILED, error: res.EM})
+            }
+        }).catch(err=>{
+            dispatch({type: USER_LOGIN_FAILED, error: "something went wrong!"})
+            console.log(">>> Error: ", err);
+        })
+    }
+}
