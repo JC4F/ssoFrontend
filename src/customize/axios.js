@@ -4,6 +4,7 @@ import axios from "axios";
 const instance = axios.create({
 //   baseURL: "http://localhost:8080",
   // baseURL: process.env.REACT_APP_BACKEND_URL
+  withCredentials: true,
 });
 
 // instance.defaults.withCredentials = true;
@@ -31,8 +32,6 @@ instance.interceptors.response.use(
     return response && response.data ? response.data : response;
   },
   function (err) {
-    console.log(">>check error: ", err)
-
     if(err && err.response && err.response.data)
         return err.response.data;
     return Promise.reject(err);
