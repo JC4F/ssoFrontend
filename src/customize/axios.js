@@ -19,7 +19,7 @@ instance.interceptors.request.use(
   function (config) {
     let headerToken = store.getState()?.account?.userInfo?.access_token ?? "";
     if(headerToken){
-      instance.defaults.headers.common['Authorization'] = `Bearer ${headerToken}`;
+      config.headers.Authorization = `Bearer ${headerToken}`;
     }
 
     // Do something before request is sent
@@ -39,6 +39,16 @@ instance.interceptors.response.use(
     return response && response.data ? response.data : response;
   },
   function (err) {
+    //any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    if(err.response.status === 400){
+      let headerToken = store.getState()?.account?.userInfo?.access_token ?? "";
+      if(headerToken){
+        err.config.headers.Authorization = `Bearer ${headerToken}`;
+      }
+      return axios.request(err.config);
+    }
+
     if(err && err.response && err.response.data)
         return err.response.data;
     return Promise.reject(err);

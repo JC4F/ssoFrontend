@@ -17,7 +17,7 @@ import Code from './components/Code/Code';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<AppRoute/>}>
@@ -26,7 +26,7 @@ root.render(
           <Route path='code' element={<Code/>}/>
         </Routes>
       </BrowserRouter>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </Provider>
 );
 
