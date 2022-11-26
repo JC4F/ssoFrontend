@@ -1,5 +1,10 @@
 import axios from "axios";
 
+let store;
+export const injectStore = _store => {
+  store = _store
+}
+
 // Set config defaults when creating the instance
 const instance = axios.create({
 //   baseURL: "http://localhost:8080",
@@ -9,12 +14,14 @@ const instance = axios.create({
 
 // instance.defaults.withCredentials = true;
 
-// Alter defaults after instance has been created
-//instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("jwt")}`;
-
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
+    let headerToken = store.getState()?.account?.userInfo?.access_token ?? "";
+    if(headerToken){
+      instance.defaults.headers.common['Authorization'] = `Bearer ${headerToken}`;
+    }
+
     // Do something before request is sent
     return config;
   },

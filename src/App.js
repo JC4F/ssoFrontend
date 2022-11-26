@@ -3,6 +3,7 @@ import Header from './components/Header/Header'
 import {doGetAccount} from './redux/action/accountAction'
 import { HashLoader } from 'react-spinners';
 import { useEffect } from 'react';
+import axios from './customize/axios';
 
 const App = ()=>{
   const dispatch = useDispatch();
@@ -13,6 +14,14 @@ const App = ()=>{
     if(user && !user.access_token){
       dispatch(doGetAccount())
     }
+  }, [])
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      axios.get('http://localhost:8081/health').then(res=>{
+        console.log(res)
+      })
+    }, 2000)
   }, [])
 
   const style = {position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}

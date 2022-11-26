@@ -56,6 +56,7 @@ export const doLogout = (ssoToken) => {
         ).then(res=>{
             if(res && +res.EC === 0){
                 dispatch({type: USER_LOGOUT_SUCCESS, user: res.DT})
+                window.location.href = '/'
             }else {
                 dispatch({type: USER_LOGOUT_FAILED, error: res.EM})
             }
