@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 let store;
 export const injectStore = _store => {
@@ -12,7 +13,15 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-// instance.defaults.withCredentials = true;
+axiosRetry(instance, {
+  retries: 3,
+  retryCondition: (error) => {
+    return error.response.status === 400 || error.response.status === 405
+  },
+  retryDelay: (retryCount, error) => {
+    return retryCount * 100;
+  }
+})
 
 // Add a request interceptor
 instance.interceptors.request.use(
@@ -41,13 +50,13 @@ instance.interceptors.response.use(
   function (err) {
     //any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    if(err.response.status === 400){
-      let headerToken = store.getState()?.account?.userInfo?.access_token ?? "";
-      if(headerToken){
-        err.config.headers.Authorization = `Bearer ${headerToken}`;
-      }
-      return axios.request(err.config);
-    }
+    // if(err.response.status === 400){
+    //   let headerToken = store.getState()?.account?.userInfo?.access_token ?? "";
+    //   if(headerToken){
+    //     err.config.headers.Authorization = `Bearer ${headerToken}`;
+    //   }
+    //   return axios.request(err.config);
+    // }
 
     if(err && err.response && err.response.data)
         return err.response.data;

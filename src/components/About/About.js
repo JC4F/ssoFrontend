@@ -1,17 +1,10 @@
-import { useEffect } from "react"
-import axios from '../../customize/axios';
+import WeatherState from "./WeatherState";
 
-const About = () => {
-
-    useEffect(()=>{
-        axios.get('http://localhost:8081/health').then(res=>{
-            console.log(res)
-        })
-    }, [])
-    
+const About = () => { 
     return ( 
         <>
             <button className="btn btn-primary">About me</button>
+            <WeatherState/>
         </>
     );
 }

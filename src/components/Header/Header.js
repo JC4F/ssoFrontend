@@ -10,7 +10,7 @@ const Header = () => {
 
     const handleLogin = ()=> {
         //redirect to sso
-        window.location.href = `${process.env.REACT_APP_BACKEND_SSO_LOGIN}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`
+        window.location.href = `${process.env.REACT_APP_BACKEND_SSO_LOGIN}?serviceURL=${process.env.REACT_APP_CURRENT_PROJECT_URL}`
     }
 
     const handleLogout = () => {
