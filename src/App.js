@@ -11,12 +11,17 @@ const App = ()=>{
   const isLoading = useSelector(state => state.account.isLoading);
   const firstRenderRef = useRef(true);
 
+  console.log(">>go out effect", firstRenderRef.current)
+
   useEffect(()=>{
+    console.log(">>check user: ", user)
     if(user && !user.access_token){
       dispatch(doGetAccount())
-      firstRenderRef.current = false;
     }
+    firstRenderRef.current = false;
+    console.log(">>go effect", firstRenderRef.current)
   }, [])
+  
   const style = {position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}
 
   return (

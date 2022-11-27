@@ -13,6 +13,8 @@ const Code = (props) => {
     const message = useSelector(state => state.account.errMessage);
     const user = useSelector(state => state.account.userInfo)
 
+    console.log(">> go into code")
+
     useEffect(()=>{
         const ssoToken = searchParams.get('ssoToken');
         if(ssoToken && firstRunRef.current === false){
@@ -22,6 +24,7 @@ const Code = (props) => {
     }, [])
 
     useEffect(()=>{
+        console.log('>> go here')
         if(user && user.access_token){
             navigate('/');
         }
