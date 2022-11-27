@@ -21,12 +21,12 @@ const Header = () => {
         <>
             <Navbar bg='light' expand='lg'>
                 <Container>
-                    <Navbar.Brand href='/'>React Bootstrap</Navbar.Brand>
+                    <NavLink to='/' className='navbar-brand'>React Bootstrap</NavLink>
                     <Navbar.Toggle aria-controls='basic-navbar-nav'/>
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='me-auto'>
                             <NavLink to='/' className='nav-link'>Home</NavLink>
-                            <NavLink to='/about' className='nav-link'>About</NavLink>
+                            <NavLink to='/weather' className='nav-link'>Weather</NavLink>
                         </Nav>
                         {user && user.access_token && 
                             <Nav>
